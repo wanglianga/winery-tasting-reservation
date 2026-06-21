@@ -10,6 +10,7 @@
     bookingPriceBreakdown
   } from '../stores/bookingStore';
   import { getAddonsByIds } from '../data/tours';
+  import { navigate } from '../lib/router';
   import type { Tour, TimeSlot } from '../types';
 
   let tour: Tour | null = null;
@@ -31,12 +32,14 @@
 
   function goBack() {
     bookingStore.prevStep();
+    navigate('/booking');
   }
 
   async function confirmBooking() {
     loading = true;
     await bookingStore.submitBooking();
     loading = false;
+    navigate('/success');
   }
 
   function formatDate(dateStr: string) {
@@ -190,9 +193,9 @@
       <Button
         variant="primary"
         size="lg"
-        class="w-full relative overflow-hidden"
+        className="w-full relative overflow-hidden"
         {loading}
-        on:click={confirmBooking}
+        onclick={confirmBooking}
       >
         <span class="relative z-10">确认预订</span>
         <span class="relative z-10 ml-2 font-display">¥{priceBreakdown.total}</span>

@@ -14,7 +14,7 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 ENV HOST=0.0.0.0
-ENV PORT=5173
+ENV PORT=5180
 
 COPY package*.json ./
 RUN npm ci
@@ -23,6 +23,6 @@ COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/vite.config.ts ./
 
-EXPOSE 5173
+EXPOSE 5180
 
-CMD ["npx", "vite", "preview", "--host", "0.0.0.0", "--port", "5173"]
+CMD ["npx", "vite", "preview", "--host", "0.0.0.0", "--port", "5180"]

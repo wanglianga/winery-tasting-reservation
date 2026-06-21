@@ -8,6 +8,7 @@
   import WineLabel from '../components/WineLabel.svelte';
   import { bookingStore, bookingTour } from '../stores/bookingStore';
   import { getWinesByIds } from '../data/wines';
+  import { navigate } from '../lib/router';
   import type { Tour } from '../types';
 
   export let tour: Tour;
@@ -27,11 +28,12 @@
   };
 
   function goBack() {
-    window.history.back();
+    navigate('/');
   }
 
   function bookNow() {
     bookingStore.setStep(2);
+    navigate('/booking');
   }
 </script>
 
@@ -228,8 +230,8 @@
       <Button
         variant="primary"
         size="lg"
-        class="w-full"
-        on:click={bookNow}
+        className="w-full"
+        onclick={bookNow}
       >
         立即预订
         <span class="ml-2 font-display">¥{tour.price}</span>

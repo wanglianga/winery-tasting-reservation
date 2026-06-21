@@ -8,6 +8,8 @@
   export let disabled = false;
   export let href: string | undefined = undefined;
   export let type: 'button' | 'submit' | 'reset' = 'button';
+  export let className: string | undefined = undefined;
+  export let onclick: ((e: MouseEvent) => void) | undefined = undefined;
 
   const baseClasses = 'inline-flex items-center justify-center font-body font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
 
@@ -30,7 +32,8 @@
 {#if href}
   <a
     {href}
-    class="{baseClasses} {variantClasses[variant]} {sizeClasses[size]} {disabled || loading ? disabledClasses : ''}"
+    class="{baseClasses} {variantClasses[variant]} {sizeClasses[size]} {disabled || loading ? disabledClasses : ''} {className || ''}"
+    {onclick}
   >
     {#if loading}
       <svg class="animate-spin h-4 w-4" viewBox="0 0 24 24">
@@ -44,7 +47,8 @@
   <button
     {type}
     {disabled}
-    class="{baseClasses} {variantClasses[variant]} {sizeClasses[size]} {disabled || loading ? disabledClasses : ''}"
+    class="{baseClasses} {variantClasses[variant]} {sizeClasses[size]} {disabled || loading ? disabledClasses : ''} {className || ''}"
+    {onclick}
   >
     {#if loading}
       <svg class="animate-spin h-4 w-4" viewBox="0 0 24 24">

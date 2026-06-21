@@ -8,7 +8,7 @@
 
 - **框架**: Svelte 5 + TypeScript
 - **样式**: Tailwind CSS 3
-- **路由**: svelte-routing
+- **路由**: 自定义 SPA Router（基于 svelte/store + History API）
 - **图标**: lucide-svelte
 - **构建工具**: Vite
 - **包管理**: npm
@@ -16,6 +16,8 @@
 ## 原始需求
 
 > 请制作酒庄品鉴路线与酒窖预约页面，用 Svelte 呈现葡萄园步道、酒款年份、品鉴杯序、酒窖时段、醒酒提示、餐食搭配、代驾和寄酒服务。游客在手机上选择轻松参观、专业品评、酒窖深度游或晚餐套餐，能看到步行长度、讲解节奏、每轮酒款、是否适合驾车和餐厅衔接；酒庄接待用平板安排讲解员、酒窖容量、团客避让和餐桌准备。画面要有产区感，地图、时间线、酒标卡和确认页之间过渡自然，让游客在下单前理解自己会喝什么、走多久、结束后怎么离开。
+
+> 修复 Svelte 5 入口初始化，改用 mount(App, { target }) 或配置兼容模式；确认首页、路线详情、预约确认和 /reception 可正常渲染并能完成核心选择流程。
 
 ## 目录结构
 
@@ -37,7 +39,10 @@ src/
 │   ├── TourDetail.svelte        # 行程详情页
 │   ├── Booking.svelte           # 预订页
 │   ├── Confirmation.svelte      # 确认页
-│   └── Success.svelte           # 成功页
+│   ├── Success.svelte           # 成功页
+│   └── Reception.svelte         # 接待管理页（平板端）
+├── lib/
+│   └── router.ts                # 自定义 SPA 路由器
 ├── data/
 │   ├── tours.ts                 # 行程数据
 │   ├── wines.ts                 # 葡萄酒数据
@@ -88,7 +93,7 @@ npm install
 npm run dev
 ```
 
-访问地址：http://localhost:5173
+访问地址：http://localhost:5180
 
 #### 3. 构建生产版本
 
@@ -102,7 +107,7 @@ npm run build
 npm run preview
 ```
 
-访问地址：http://localhost:5173
+访问地址：http://localhost:5180
 
 ### Docker 一键启动
 
@@ -117,7 +122,7 @@ npm run preview
 docker compose up --build
 ```
 
-访问地址：http://localhost:5173
+访问地址：http://localhost:5180
 
 #### 后台运行
 

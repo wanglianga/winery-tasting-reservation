@@ -14,6 +14,7 @@
   } from '../stores/bookingStore';
   import { addonServices, getTourById } from '../data/tours';
   import { getTimeSlotsByTour } from '../data/timeSlots';
+  import { navigate } from '../lib/router';
   import type { TimeSlot, AddonService, Tour } from '../types';
 
   let tour: Tour | null = null;
@@ -45,7 +46,7 @@
   function goBack() {
     bookingStore.prevStep();
     if (currentStep === 2) {
-      window.history.back();
+      navigate('/');
     }
   }
 
@@ -71,10 +72,11 @@
   }
 
   function continueNext() {
-    if (currentStep < 4) {
+    if (currentStep === 2) {
       bookingStore.nextStep();
-    } else {
+    } else if (currentStep === 3) {
       bookingStore.nextStep();
+      navigate('/confirmation');
     }
   }
 
@@ -254,9 +256,9 @@
       <Button
         variant="primary"
         size="lg"
-        class="w-full"
+        className="w-full"
         disabled={!$canProceed}
-        on:click={continueNext}
+        onclick={continueNext}
       >
         {currentStep === 2 ? '继续' : currentStep === 3 ? '确认预订' : '继续'}
       </Button>

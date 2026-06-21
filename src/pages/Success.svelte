@@ -3,6 +3,7 @@
   import { CheckCircle, Calendar, Clock, Users, MapPin, Ticket } from 'lucide-svelte';
   import Button from '../components/ui/Button.svelte';
   import { bookingStore, bookingTour, bookingTimeSlot } from '../stores/bookingStore';
+  import { navigate } from '../lib/router';
   import type { Tour, TimeSlot, Booking } from '../types';
 
   let tour: Tour | null = null;
@@ -23,6 +24,7 @@
 
   function backToHome() {
     bookingStore.reset();
+    navigate('/');
   }
 
   function formatDate(dateStr: string) {
@@ -157,17 +159,17 @@
       <Button
         variant="primary"
         size="lg"
-        class="w-full"
-        on:click={viewBooking}
+        className="w-full"
+        onclick={viewBooking}
       >
         查看预订
       </Button>
       <Button
         variant="outline"
         size="lg"
-        class="w-full"
+        className="w-full"
         href="/"
-        on:click={backToHome}
+        onclick={backToHome}
       >
         返回首页
       </Button>

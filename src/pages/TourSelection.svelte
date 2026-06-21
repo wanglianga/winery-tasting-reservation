@@ -5,9 +5,14 @@
   import Button from '../components/ui/Button.svelte';
   import { tours } from '../data/tours';
   import { bookingStore } from '../stores/bookingStore';
+  import { navigate } from '../lib/router';
 
   function selectTour(tourId: string) {
     bookingStore.setTour(tourId);
+    const tour = tours.find(t => t.id === tourId);
+    if (tour) {
+      navigate(`/tour/${tour.slug}`);
+    }
   }
 </script>
 

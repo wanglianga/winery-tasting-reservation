@@ -2,14 +2,14 @@ services:
   web:
     build: .
     ports:
-      - "5173:5173"
+      - "5180:5180"
     environment:
       - NODE_ENV=production
       - HOST=0.0.0.0
-      - PORT=5173
+      - PORT=5180
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "--spider", "-q", "http://localhost:5173"]
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:5180"]
       interval: 30s
       timeout: 10s
       retries: 3
